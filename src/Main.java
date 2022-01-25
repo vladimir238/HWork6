@@ -1,23 +1,20 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
 
 
 public class Main {
     public static void main(String[] args) {
-        String numFone = "Это электронная 89037994521 база  89268034567. Телефонных номеров 89458679789 абонентов сети.";
+        String numFone = "Это электронная 890379945 база  89268034567. Телефонных +79296542345 номеров 89458679789 абонентов сети.";
         System.out.println("Текст  с номерами телефонов " + numFone);
-        Pattern pattern = Pattern.compile("8\\d{10}");
-        Matcher matcher = pattern.matcher(numFone);
+
         CorrectNum correct = new CorrectNum();
-        String[] oneNum = new String[10];
-        int i = 0;
-        while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            oneNum[i] = correct.correctN(numFone.substring(start, end));
-            System.out.println(oneNum[i]);
-            i++;
-        }
+
+        String[] twoNum = new String[10];
+        String[] threeNum = new String[10];
+        twoNum = correct.searchNum(numFone, "8\\d{10}\\b");
+        threeNum = correct.searchNum(numFone, "" + "7\\d{10}\\b");
+        System.out.println(Arrays.toString(twoNum));
+        System.out.println(Arrays.toString(threeNum));
+
 
     }
 }

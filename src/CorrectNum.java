@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CorrectNum {
     public boolean examNum(String numStr) {
 
@@ -21,6 +24,22 @@ public class CorrectNum {
         builder.append("+7" + "(" + partNum1 + ")" + partNum2 + "-" + partNum3 + "-" + partNum4);
         return builder.toString();
 
+    }
 
+    public String[] searchNum(String text, String regular) {
+
+        Pattern pattern = Pattern.compile(regular);
+        Matcher matcher = pattern.matcher(text);
+        String[] oneNum = new String[100];
+        int i = 0;
+        while (matcher.find()) {
+            int start = matcher.start();
+            int end = matcher.end();
+            //System.out.println(text.substring(start, end));
+            oneNum[i] = correctN(text.substring(start, end));
+            System.out.println(oneNum[i]);
+            i++;
+        }
+        return oneNum;
     }
 }

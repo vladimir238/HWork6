@@ -1,23 +1,13 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
 public class Main {
+    //Ищем номера телефонов в тексте по 2 шаблонам и выводим их на консоль
     public static void main(String[] args) {
-        String numFone = "Это электронная 89037994521 база  89268034567. Телефонных номеров 89458679789 абонентов сети.";
+        String numFone = "Это электронная 890379945 база  89268034567. Телефонных +79296542345 номеров 89458679789 абонентов сети.";
         System.out.println("Текст  с номерами телефонов " + numFone);
-        Pattern pattern = Pattern.compile("8\\d{10}");
-        Matcher matcher = pattern.matcher(numFone);
+
         CorrectNum correct = new CorrectNum();
-        String[] oneNum = new String[10];
-        int i = 0;
-        while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            oneNum[i] = correct.correctN(numFone.substring(start, end));
-            System.out.println(oneNum[i]);
-            i++;
-        }
+
+        correct.searchNum(numFone, "8\\d{10}\\b");
+        correct.searchNum(numFone, "" + "7\\d{10}\\b");
 
     }
 }
